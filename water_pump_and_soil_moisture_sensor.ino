@@ -10,10 +10,6 @@ void setup() {
   digitalWrite(sensorPinPower, LOW);
 
   Serial.begin(9600);
-  
-  
-
-
 }
 
 void loop() {
@@ -25,7 +21,7 @@ void loop() {
     activatePump();
   }
   delay(5000);
-  
+
 }
 
 void activatePump(){
