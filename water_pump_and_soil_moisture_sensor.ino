@@ -1,3 +1,4 @@
+#include <Wire.h>
 #define waterPumpPin 3
 #define sensorPinPower 13
 #define sensorPinRead A0
@@ -10,7 +11,17 @@ void setup() {
   digitalWrite(sensorPinPower, LOW);
 
   Serial.begin(9600);
+  Wire.begin();
+  Wire.onRequest(requestEvent);
 }
+
+void requestEvent() {
+  Wire.beginTransmission(A5);
+  Wire.write("hello ");
+  Wire.endTransmission();
+}
+
+int x = -1;
 
 void loop() {
   int soilMoisturePercentage = readSoilMoisture();
@@ -22,6 +33,13 @@ void loop() {
   }
   delay(5000);
 
+  // just to prove that it works
+  // ------------
+  ++x %= 12;
+  if(x == 0){
+    requestEvent();
+  }
+  // ------------
 }
 
 void activatePump(){
