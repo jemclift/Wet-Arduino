@@ -1,4 +1,5 @@
 #include <LiquidCrystal.h>
+#include <Wire.h>
 
 const int rs = 10, en = 9, d4 = 6, d5 = 5, d6 = 4, d7 = 3, btn_pin = 2, led_pin = 7, bzr_pin = 13;
 LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
@@ -20,6 +21,20 @@ void setup() {
   pinMode(led_pin, OUTPUT);
   pinMode(btn_pin, INPUT_PULLUP);
   attachInterrupt(digitalPinToInterrupt(btn_pin), buttonPress, FALLING);
+
+  Wire.begin(A5);
+  Wire.onReceive(receiveEvent);
+  Serial.begin(9600);
+}
+
+void receiveEvent(int howMany) {
+  char message[] = {};
+
+  for(int i=0; i<howMany; i++){
+    message[i] = Wire.read();
+  }
+  Serial.println(message);
+  Serial.println("done");
 }
 
 void updateLCD(int temp, int soil_hum, int light) {
