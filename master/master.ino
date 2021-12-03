@@ -3,6 +3,11 @@
 #define sensorPinPower 13
 #define sensorPinRead A0
 
+int soilCheckDelay = 60; // minutes
+unsigned long nextSoilCheck = 0;
+int sensorCheckDelay = 1; // minutes
+unsigned long nextSensorCheck = 0;
+
 void setup() {
   // put your setup code here, to run once:
   pinMode(waterPumpPin, OUTPUT);
@@ -21,27 +26,6 @@ void requestEvent() {
   Wire.endTransmission();
 }
 
-int x = -1;
-
-void loop() {
-  int soilMoisturePercentage = readSoilMoisture();
-  Serial.print("Water Moisture level: ");
-  Serial.print(soilMoisturePercentage);
-  Serial.println("%");
-  if (soilMoisturePercentage < 50){
-    activatePump();
-  }
-  delay(5000);
-
-  // just to prove that it works
-  // ------------
-  ++x %= 12;
-  if(x == 0){
-    requestEvent();
-  }
-  // ------------
-}
-
 void activatePump(){
   Serial.println("Water Pump Activated");
   digitalWrite(waterPumpPin, HIGH);
@@ -56,4 +40,36 @@ int readSoilMoisture(){
   digitalWrite(sensorPinPower,LOW);
   val = map(val,1024,0,0,100);
   return val;
+}
+
+// int x = -1;
+
+void loop() {
+  unsigned long currentTime = millis();
+
+  // water plant if it's too dry every soilCheckDelay mins
+  if (currentTime > nextSoilCheck) {
+    int soilMoisturePercentage = readSoilMoisture();
+    Serial.print("Water Moisture level: ");
+    Serial.print(soilMoisturePercentage);
+    Serial.println("%");
+    if (soilMoisturePercentage < 50) {
+      activatePump();
+    }
+    nextSoilCheck = currentTime + (soilCheckDelay*60*1000);
+  }
+
+  // send temperature and light readings to other arduino
+  if (currentTime > nextSensorCheck) {
+    // TODO: check light and temp values and send to other arduino
+    nextSensorCheck = currentTime + (sensorCheckDelay*60*1000);
+  }
+
+  // just to prove that it works
+  // ------------
+  // ++x %= 12;
+  // if(x == 0){
+  //   requestEvent();
+  // }
+  // ------------
 }
