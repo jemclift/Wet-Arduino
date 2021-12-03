@@ -3,9 +3,10 @@
 #define sensorPinPower 13
 #define sensorPinRead A0
 
-int soilCheckDelay = 60; // minutes
+
+float soilCheckDelay = 0.1; // minutes
 unsigned long nextSoilCheck = 0;
-int sensorCheckDelay = 1; // minutes
+float sensorCheckDelay = 1; // minutes
 unsigned long nextSensorCheck = 0;
 
 void setup() {
@@ -58,7 +59,6 @@ void loop() {
     }
     nextSoilCheck = currentTime + (soilCheckDelay*60*1000);
   }
-
   // send temperature and light readings to other arduino
   if (currentTime > nextSensorCheck) {
     // TODO: check light and temp values and send to other arduino
