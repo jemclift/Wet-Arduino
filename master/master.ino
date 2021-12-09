@@ -2,6 +2,7 @@
 #define waterPumpPin 3
 #define sensorPinPower 13
 #define sensorPinRead A0
+#define buttonPin 2
 #define tempPin A1
 #define lightSensorPin A2
 
