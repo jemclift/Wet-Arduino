@@ -2,9 +2,10 @@
 #define waterPumpPin 3
 #define sensorPinPower 13
 #define sensorPinRead A0
+#define buttonPin 2
 
 
-float soilCheckDelay = 0.1; // minutes
+float soilCheckDelay = 0.5; // minutes
 unsigned long nextSoilCheck = 0;
 float sensorCheckDelay = 1; // minutes
 unsigned long nextSensorCheck = 0;
@@ -15,11 +16,27 @@ void setup() {
   pinMode(sensorPinPower, OUTPUT);
   digitalWrite(waterPumpPin, LOW);
   digitalWrite(sensorPinPower, LOW);
+  // attachInterrupt(digitalPinToInterrupt(buttonPin), manualButtonPump, RISING);
 
   Serial.begin(9600);
   Wire.begin();
   Wire.onRequest(requestEvent);
 }
+
+
+void manualButtonPump(){
+  int buttonState = HIGH;
+  digitalWrite(waterPumpPin, HIGH);
+
+  Serial.println("pump manually on");
+  Serial.println(digitalRead(buttonPin));
+  while (buttonState == HIGH){
+    delay(10);
+    buttonState = digitalRead(buttonPin);
+  }
+  digitalWrite(waterPumpPin, LOW);
+}
+
 
 void requestEvent() {
   Wire.beginTransmission(A5);
@@ -63,6 +80,10 @@ void loop() {
   if (currentTime > nextSensorCheck) {
     // TODO: check light and temp values and send to other arduino
     nextSensorCheck = currentTime + (sensorCheckDelay*60*1000);
+  }
+
+  if (digitalRead(buttonPin) == HIGH){
+    manualButtonPump();
   }
 
   // just to prove that it works
