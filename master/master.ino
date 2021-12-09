@@ -2,8 +2,8 @@
 #define waterPumpPin 3
 #define sensorPinPower 13
 #define sensorPinRead A0
-#define buttonPin 2
-
+#define tempPin A1
+#define lightSensorPin A2
 
 float soilCheckDelay = 0.5; // minutes
 unsigned long nextSoilCheck = 0;
@@ -14,6 +14,7 @@ void setup() {
   // put your setup code here, to run once:
   pinMode(waterPumpPin, OUTPUT);
   pinMode(sensorPinPower, OUTPUT);
+  pinMode(lightSensorPin, INPUT);
   digitalWrite(waterPumpPin, LOW);
   digitalWrite(sensorPinPower, LOW);
   // attachInterrupt(digitalPinToInterrupt(buttonPin), manualButtonPump, RISING);
@@ -49,6 +50,21 @@ void activatePump(){
   digitalWrite(waterPumpPin, HIGH);
   delay(2000);
   digitalWrite(waterPumpPin, LOW);
+}
+
+int readLightSensor() {
+  int lightReading = analogRead(lightSensorPin);
+  return lightReading;
+}
+
+// returns temp in degrees c
+double readTemperature() {
+  int sensorReading = analogRead(tempPin);
+  double temp = (double)sensorReading / 1024;
+  temp = temp * 5;
+  temp = temp - 0.5;
+  temp = temp * 100;
+  return temp;
 }
 
 int readSoilMoisture(){
