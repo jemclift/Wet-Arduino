@@ -6,10 +6,13 @@
 #define tempPin A1
 #define lightSensorPin A2
 
-float soilCheckDelay = 0.5; // minutes
+float soilCheckDelay = 0.01; // minutes
 unsigned long nextSoilCheck = 0;
 float sensorCheckDelay = 1; // minutes
 unsigned long nextSensorCheck = 0;
+int numOfSoilReadings = 0; // This keeps track of the number of times the soil moisture has been checked.
+int totalSoilMoisturePercentage = 0; //The soil percentage is added to this and then divided by the amount of checks.
+int numOfSoilReadingsBeforeCheck = 10;
 
 void setup() {
   // put your setup code here, to run once:
@@ -18,11 +21,11 @@ void setup() {
   pinMode(lightSensorPin, INPUT);
   digitalWrite(waterPumpPin, LOW);
   digitalWrite(sensorPinPower, LOW);
-  // attachInterrupt(digitalPinToInterrupt(buttonPin), manualButtonPump, RISING);
 
   Serial.begin(9600);
   Wire.begin();
   Wire.onRequest(requestEvent);
+
 }
 
 
@@ -88,8 +91,14 @@ void loop() {
     Serial.print("Water Moisture level: ");
     Serial.print(soilMoisturePercentage);
     Serial.println("%");
-    if (soilMoisturePercentage < 50) {
-      activatePump();
+    totalSoilMoisturePercentage = soilMoisturePercentage + totalSoilMoisturePercentage;
+    numOfSoilReadings +=1;
+    if ((numOfSoilReadings % numOfSoilReadingsBeforeCheck == 0) and (numOfSoilReadings != 0)){
+      int averageSoilMoisturePercentage = totalSoilMoisturePercentage / numOfSoilReadingsBeforeCheck;
+      Serial.println("Check Soil Moisture Percentage");
+      if (averageSoilMoisturePercentage < 50) {
+        activatePump();
+      }
     }
     nextSoilCheck = currentTime + (soilCheckDelay*60*1000);
   }
