@@ -14,6 +14,10 @@ int warningFlashDelay = 500; // milliseconds
 bool warningFlashState = true;
 int warningCode = 1;
 
+int temperature = 0;
+int lightLevel = 0;
+int moisture = 0;
+
 // 0 - No Warning
 // 1 - Too Dry
 // 2 - Too Dark
@@ -44,13 +48,13 @@ void setup() {
 }
 
 void receiveEvent(int howMany) {
-  char message[] = {};
-
-  for(int i=0; i<howMany; i++){
-    message[i] = Wire.read();
+  temperature = Wire.read();
+  lightLevel = Wire.read();
+  moisture = Wire.read();
+  while(Wire.available() > 0){
+    Wire.read();
+    Serial.println("spillage");
   }
-  Serial.println(message);
-  Serial.println("done");
 }
 
 void updateLCD(int temp, int soil_hum, int light) {
@@ -98,10 +102,10 @@ void buttonPress() {
 }
 
 void loop() {
-  // todo: recieve info from other board
+  // todo: receive info from other board
   if (dispayWarning) {
     warningMsg();
   } else {
-    updateLCD(35, 12, 50);
+    updateLCD(temperature, moisture, lightLevel);
   }
 }

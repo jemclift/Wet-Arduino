@@ -11,6 +11,12 @@ unsigned long nextSoilCheck = 0;
 float sensorCheckDelay = 1; // minutes
 unsigned long nextSensorCheck = 0;
 
+// readings
+double temperature = 0;
+int lightLevel = 0;
+int soilMoisturePercentage = 0;
+
+
 void setup() {
   // put your setup code here, to run once:
   pinMode(waterPumpPin, OUTPUT);
@@ -40,11 +46,14 @@ void manualButtonPump(){
 }
 
 
-void requestEvent() {
+void sendToSlave() {
   Wire.beginTransmission(A5);
-  Wire.write("hello ");
+  byte message[] = {(byte)temperature, lightLevel, soilMoisturePercentage};
+  int message_length = 10;
+  Wire.write(message, message_length);
   Wire.endTransmission();
 }
+
 
 void activatePump(){
   Serial.println("Water Pump Activated");
@@ -53,20 +62,24 @@ void activatePump(){
   digitalWrite(waterPumpPin, LOW);
 }
 
+
 int readLightSensor() {
   int lightReading = analogRead(lightSensorPin);
   return lightReading;
 }
 
+
 // returns temp in degrees c
-double readTemperature() {
+double readTemperatureSensor() {
   int sensorReading = analogRead(tempPin);
+  // return ((double)sensorReading-102.4) * 125/256;
   double temp = (double)sensorReading / 1024;
   temp = temp * 5;
   temp = temp - 0.5;
   temp = temp * 100;
   return temp;
 }
+
 
 int readSoilMoisture(){
   digitalWrite(sensorPinPower, HIGH);
@@ -77,14 +90,14 @@ int readSoilMoisture(){
   return val;
 }
 
-// int x = -1;
 
 void loop() {
   unsigned long currentTime = millis();
-
+  bool sendData = false;
   // water plant if it's too dry every soilCheckDelay mins
   if (currentTime > nextSoilCheck) {
-    int soilMoisturePercentage = readSoilMoisture();
+    sendData = true;
+    soilMoisturePercentage = readSoilMoisture();
     Serial.print("Water Moisture level: ");
     Serial.print(soilMoisturePercentage);
     Serial.println("%");
@@ -95,19 +108,19 @@ void loop() {
   }
   // send temperature and light readings to other arduino
   if (currentTime > nextSensorCheck) {
-    // TODO: check light and temp values and send to other arduino
+    sendData = true;
+    lightLevel = readLightSensor();
+    temperature = readTemperatureSensor();
+
     nextSensorCheck = currentTime + (sensorCheckDelay*60*1000);
+  }
+
+  if (sendData){
+    sendToSlave();
   }
 
   if (digitalRead(buttonPin) == HIGH){
     manualButtonPump();
   }
 
-  // just to prove that it works
-  // ------------
-  // ++x %= 12;
-  // if(x == 0){
-  //   requestEvent();
-  // }
-  // ------------
 }
