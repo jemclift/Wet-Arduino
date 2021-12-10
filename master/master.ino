@@ -68,7 +68,7 @@ void activatePump(){
 
 int readLightSensor() {
   int lightReading = analogRead(lightSensorPin);
-  return lightReading;
+  return lightReading / 4;
 }
 
 
