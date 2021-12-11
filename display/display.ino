@@ -44,7 +44,12 @@ void setup() {
 
   Wire.begin(A5);
   Wire.onReceive(receiveEvent);
-  Serial.begin(9600);
+}
+
+void turnOffWarning() {
+  dispayWarning = false;
+  warningCode = 0;
+  digitalWrite(led_pin, LOW);
 }
 
 void receiveEvent(int howMany) {
@@ -53,7 +58,6 @@ void receiveEvent(int howMany) {
   moisture = Wire.read();
   while(Wire.available() > 0){
     Wire.read();
-    Serial.println("spillage");
   }
 
   // 1 - Too Dry
@@ -66,8 +70,7 @@ void receiveEvent(int howMany) {
     warningCode = 1;
   } else {
     if (warningCode == 1) {
-      dispayWarning = false;
-      warningCode = 0;
+      turnOffWarning();
     }
     canBeWarning[0] = true;
   }
@@ -76,8 +79,7 @@ void receiveEvent(int howMany) {
     warningCode = 2;
   } else {
     if (warningCode == 2) {
-      dispayWarning = false;
-      warningCode = 0;
+      turnOffWarning();
     }
     canBeWarning[1] = true;
   }
@@ -86,8 +88,7 @@ void receiveEvent(int howMany) {
     warningCode = 3;
   } else {
     if (warningCode == 3) {
-      dispayWarning = false;
-      warningCode = 0;
+      turnOffWarning();
     }
     canBeWarning[2] = true;
   }
@@ -105,7 +106,7 @@ void updateLCD(int temp, int soil_hum, int light) {
   lcd.print("TEMP:"); lcd.print(temp); lcd.write(byte(0));
   lcd.print("SOIL:"); lcd.print(soil_hum); lcd.print("%");
   lcd.setCursor(0, 1);
-  lcd.print("LIGHT:"); lcd.print(light); lcd.print("%");
+  lcd.print("   LIGHT:"); lcd.print(light); lcd.print("%");
   lcd.print("       ");
 }
 
@@ -140,6 +141,7 @@ void warningMsg() {
 void buttonPress() {
   dispayWarning = false;
   canBeWarning[warningCode-1] = false;
+  warningCode = 0;
   digitalWrite(led_pin, LOW);
 }
 
