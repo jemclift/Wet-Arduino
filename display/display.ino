@@ -16,7 +16,7 @@ int warningCode = 0;
 bool canBeWarning[3] = {true, true, true};
 
 // 0 - No Warning
-// 1 - Too Dark
+// 1 - Too Dry
 // 2 - Too Hot
 // 3 - Too Cold
 
