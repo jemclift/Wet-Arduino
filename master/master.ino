@@ -30,7 +30,7 @@ void setup() {
 
   Serial.begin(9600);
   Wire.begin();
-  Wire.onRequest(requestEvent);
+  Wire.onRequest(sendToSlave);
 
 }
 
