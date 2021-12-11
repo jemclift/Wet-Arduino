@@ -40,7 +40,6 @@ void manualButtonPump(){
   digitalWrite(waterPumpPin, HIGH);
 
   Serial.println("pump manually on");
-  Serial.println(digitalRead(buttonPin));
   while (buttonState == HIGH){
     delay(10);
     buttonState = digitalRead(buttonPin);
@@ -61,14 +60,19 @@ void sendToSlave() {
 void activatePump(){
   Serial.println("Water Pump Activated");
   digitalWrite(waterPumpPin, HIGH);
-  delay(2000);
+  unsigned long currentTime = millis();
+  unsigned long pumpOnTime = currentTime + 2000;
+  while (currentTime < pumpOnTime){
+    currentTime = millis();
+  }
+  // delay(2000);
   digitalWrite(waterPumpPin, LOW);
 }
 
 
 int readLightSensor() {
   int lightReading = analogRead(lightSensorPin);
-  return lightReading / 4;
+  return map(lightReading, 0, 1024, 0, 100);
 }
 
 
@@ -108,9 +112,11 @@ void loop() {
     numOfSoilReadings +=1;
     if ((numOfSoilReadings % numOfSoilReadingsBeforeCheck == 0) and (numOfSoilReadings != 0)){
       int averageSoilMoisturePercentage = totalSoilMoisturePercentage / numOfSoilReadingsBeforeCheck;
+      totalSoilMoisturePercentage = 0;
       Serial.println("Check Soil Moisture Percentage");
       if (averageSoilMoisturePercentage < 50) {
         activatePump();
+        // Serial.println("activated Pump");
       }
     }
     nextSoilCheck = currentTime + (soilCheckDelay*60*1000);
