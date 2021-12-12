@@ -16,7 +16,7 @@ Unfortunately, as most university students do not live in their university accom
 
 Most plants require regular watering and will wilt and eventually die if neglected.
 
->  **INSERT STUDENT QUOTE ABOUT DEAD/DYING PLANTS**
+>  **"When plants are not watered properly they wilt."- Luiz de Queiroz College of Agriculture**
 
 To solve this problem, our project is a plant irrigation system that automatically waters a plant when its soil is too dry. It also monitors other important values like light and temperature and all this data is displayed on a remote arduino with an LCD that can be placed on your desk. If the plants soil is too dry, it is too hot or cold, a warning is displayed with a buzzer tone and flashing LED to warn the plants owner.
 
@@ -24,8 +24,18 @@ To solve this problem, our project is a plant irrigation system that automatical
 
 > A literature and technology review. This should help provide evidence for your chosen
 > problem area and justification for your development decisions. (approx ½ - 1 page)
+> 
 
-...
+To create an effective irrigation system we researched a few factors including optimal temperature, light and water for indoor plants. 
+
+Light is the most important factor for growing plants. We decided it was therefore crucial to include a light sensor to give the plant owner an indication of how much light there is where the plant is located. The amount of light is quickly visibile on the display. As opposed to managing the amount of light the plant receives, the light sensor is more of a tool to help the grower assess and optimise the location of their plant.
+
+Temperature is the second most important factor influencing plant growth. We identified 15°C-25°C to be a healthy range for growing indoor plants. Temperatures outside this range for excessive amounts of time may lead to stunted growth or even death. Our solution provides an up to date accurate temperature on the display and also a warning to alert the grower to suboptimal or dangerous temperatures. Making this valuable information so visible really helps the grower to ensure their plant has the best chance of being healthy. 
+
+Water is the only factor out of the 3 which can't be set and left. Improper watering causes problems and will affect the growth of the plant. 
+> "Feel the soil by pushing a finger an inch or so below the surface. If the soil is still moist, no further water is needed."
+
+We used this simple principle when creating the automtic system. If the soil is dry then water until the soil is moist.
 
 - students want to be able to overide and manually water plants
 
