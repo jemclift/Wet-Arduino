@@ -27,17 +27,33 @@ To solve this problem, our project is a plant irrigation system that automatical
 
 ...
 
+- students want to be able to overide and manually water plants
+
 ### Development Process
 
 > An overview of the development process - what you did, how you did it, what additional
 > research you conducted, any problems you encountered and how you overcame
 > these. (approx 1 page)
 
-**Overview**
+#### Overview
+
+**millis() VS delay()**
+
+Originally the first version of our project used the `delay()` function to limit sensor readings. There were a few problems with this aproach. If one sensor needs to be checked more frequently than another, for example the light and temperature are checked very frequently to update the display, then larger delays for longer wait sensor readings cannot be used. This is becuase the `delay()` function almost completely pauses the board. The solution to this problem is to use the `millis()` function instead. `millis()` returns the milliseconds that the arduino has been running a program for. This can be used to check if enough time has passed to run an event and then set the next time to run that event. This way multiple "delays" can run simultaneously.
+
+**Warnings**
+
+If you have a warning system and a way to dismiss a warning you will have to deal with the problem of when to next allow the same warning. Although we could have used a timer to dismiss a warning for some amount of time, we decided to reset the ability for a warning type to alert the user when it's value returns to a normal range. This way if a user dismisses, for example, a to hot warning, they will next be alerted when the temperature returns to normal before rising again. We used a boolean array `canBeWarning` which tell the program whether a specific type of warning is currently allowed. Warnings also automatically dismiss themselves if sensor readings return to normal.
+
+**Communication**
 
 ...
 
-**Additional research (Ideas)**
+**Watering**
+
+...
+
+#### Additional research
 
 - How dry should the soil be to warrant watering
 - How far is typical plant from student in a room (length of wires connecting both arduinos)
@@ -50,15 +66,15 @@ To solve this problem, our project is a plant irrigation system that automatical
 > components used in the final prototype and how these interact with one another in your
 > system. (approx ½ - 1 page)
 
-**Description**
+#### Description
 
 ...
 
-**Components**
+#### Components
 
 2 x Arduino Uno and 3 x 1m wires to connect them
 
-Sensor/Master Board
+**Sensor/Master Board**
 
 - Soil Moisture Sensor
 - Small Submergible Pump
@@ -69,7 +85,7 @@ Sensor/Master Board
 - Button
 - Jumper Wires
 
-Display Board
+**Display Board**
 
 - 16 Column 2 Row LCD
 - Button
@@ -85,7 +101,7 @@ Display Board
 
 ...
 
-**Ideas**
+#### Ideas
 
 - In a real application of this project we would use a better sensor and a large tank of water
 
