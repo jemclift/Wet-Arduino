@@ -80,13 +80,17 @@ If you have a warning system and a way to dismiss a warning you will have to dea
 
 #### Description
 
-...
+One Arduino Uno is placed at the plant and the other is intended to display information and warnings about the plant so can be placed on a desk or somewhere in sight of the user. The boards are connected by 3 Wires which can be long enough to place the master and display far appart in a room.
+
+The plant board has sensors to measure soil humidity, temperature and light. It also has a submergible pump (placed in any water container) and a button to manually water the plant.
+
+The display board has an LCD to display sensor data and warnings. It also has a potentiometer to vary the LCD contrast, a button to dismiss warnings, and a LED and buzzer to alert the user of warnings.
 
 #### Components
 
 2 x Arduino Uno and 3 x 1m wires to connect them
 
-**Sensor/Master Board**
+**Master Board**
 
 - Soil Moisture Sensor
 - Small Submergible Pump
