@@ -37,7 +37,9 @@ Water is the only factor out of the 3 which can't be set and left. Improper wate
 
 We used this simple principle when creating the automtic system. If the soil is dry then water until the soil is moist.
 
-- students want to be able to overide and manually water plants
+V. Pennisi, B., 2006. Growing Indoor Plants with Success | UGA Cooperative Extension. [online] Extension.uga.edu. Available at: <https://extension.uga.edu/publications/detail.html?number=B1318&title=Growing%20Indoor%20Plants%20with%20Success#water> 
+
+W. D., H., 1945. [online] Scholars.unh.edu. Available at: <https://scholars.unh.edu/cgi/viewcontent.cgi?article=1320&context=agbulletin>
 
 ### Development Process
 
