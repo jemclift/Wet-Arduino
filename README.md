@@ -84,6 +84,10 @@ Our system has a master board and a slave board. The master is responsible for g
 
 In order to water the plant we first collected a sample of dirt which we deemed to be appropriately moist. We deemed the soil as moist using a technique we came across in our research above "Feel the soil by pushing a finger an inch or so below the surface. If the soil is still moist, no further water is needed." We then used our soil moisture sensor to read how moist this sample of soil was (53%). In order for our watering system to keep the soil moisture at this level. Every 30 minutes the arduino will use the soil moisture sensor to take 10 readings of how moist the soil is and then calculate the average of these readings. If the average is below 50% then the pump will turn on for 2 seconds and pump a small amount of water through a tube which is then placed in the soil of the plant. The reason for the averaging is that the sensor can sometimes produce incorrect values that may cause the plant to get overwatered. In addition, if for any reason the user wanted to water the plant manually. we implemented a button that the user could press which would pump water into the plant for as long as it is pressed down.
 
+**Updating LCD**
+
+Every 10 minutes the master board will send the slave arduino the current Temperature, Light exposure and Soil Moisture percentage so that it can be presented on the LCD screen.
+
 #### Additional research
 
 - How dry should the soil be to warrant watering
