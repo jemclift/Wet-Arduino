@@ -14,6 +14,8 @@ University students love to decorate their rooms with plants as it makes their r
 
 Unfortunately, as most university students do not live in their university accommodation all year round, they often leave their plants unattended unable to water them. Students are also busy so can often forget to water their plants.
 
+In addition a lot of people even struggle to properly take care of their plants even when they are around as during their busy lives they often forget to water them. 
+
 Most plants require regular watering and will wilt and eventually die if neglected.
 
 >  **"When plants are not watered properly they wilt."- Luiz de Queiroz College of Agriculture**
@@ -48,6 +50,23 @@ W. D., H., 1945. [online] Scholars.unh.edu. Available at: <https://scholars.unh.
 > these. (approx 1 page)
 
 #### Overview
+
+**Survey**
+In order to research the problem in more depth. We conducted a survey asking asking university of Bath students who owned plants, "Would you be interested in using an automatic plant irrigator and why?"
+
+In total we asked 28 people. Of these 28 people 27 said "yes" and 1 said "no".
+
+Here are examples of some of the responses we received:
+
+"No, I as I often enjoy watering and taken care of the plants myself. Also, as I do not live very far away from university it means i can easily take the plant home with me while I am on holiday away from university."
+"yes, because I am too busy to water all my plants."
+"yeah, I forget all the time."
+"yeah, My chilli plant is almost dead so it would be very useful."
+"yes, because I won't be here over Christmas to water them."
+"yeah, because I either water them too much or too little and then they die."
+"yes, as the only reason I haven't bought a plant for my room was because i was 
+
+This survey turned out to be very useful as  informed us that there was a very high demand for our product with only one person saying they wouldn't be interested.
 
 **millis() VS delay()**
 
@@ -98,7 +117,7 @@ The display board has an LCD to display sensor data and warnings. It also has a 
 - Small Submergible Pump
 - Temperature Sensor
 - Phototransistor
-- Resistors (2 x 10K Ohms, 1K Ohms)
+- Resistors (2 x 1K Ohms, 10K Ohms)
 - BC548 Transistor
 - Button
 - Jumper Wires
@@ -108,7 +127,7 @@ The display board has an LCD to display sensor data and warnings. It also has a 
 - 16 Column 2 Row LCD
 - Button
 - Piezo Buzzer
-- Resistors (2 x 10K Ohms)
+- Resistors (2 x 1K Ohms)
 - Red LED
 - Potentiometer
 - Jumper Wires
@@ -116,12 +135,10 @@ The display board has an LCD to display sensor data and warnings. It also has a 
 ### Summary & Conclusions
 
 > Short summary and conclusions (approx ½ page)
-
-...
-
-#### Ideas
-
-- In a real application of this project we would use a better sensor and a large tank of water
+> Overall we deemed this project as a great success. It ended up functioning exactly how we wanted it to and it performed well in all of our tests. It was able to successfully measure the moisture level of soil and water it if it were too dry. In addition the screen managed to function successfully reporting to the user the temperature, and the amount of light the plant was receiving. The alarm systems were also a great success as they acted as a great warning system whenever the plant was too dry or hot. However we also thought of some improvments that we would have made if we wanted to sell and distribute this product. These were:
+> 
+- We would use a better soil moisture censor. This is because the sensor we use degrades over time and can actually poision any plants or even kill them if the sensor is used over a prolonged period of time.
+- We could have also used a larger tank of water rather than a cup. This would mean that the plant can be left unattended for a longer period of time without needing to refill the tank of water.
 
 ### Appendix
 
