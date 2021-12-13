@@ -49,8 +49,9 @@ void manualButtonPump(){
 void sendToSlave() {
   // This function sends the data recorded to the slave arudino so it can be shown on the screen.
   Wire.beginTransmission(A5);
+  // send a formatted message containing the temperature, lightLevel and soilMoisture
   byte message[] = {(byte)temperature, lightLevel, soilMoisturePercentage};
-  int message_length = 10;
+  int message_length = 3;
   Wire.write(message, message_length);
   Wire.endTransmission();
 }
