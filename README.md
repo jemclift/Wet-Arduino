@@ -148,5 +148,6 @@ The display board has an LCD to display sensor data and warnings. It also has a 
 > tools such as Autodesk Eagle (free for students) or Frtizing (not free). Alternatively you
 > may choose to draw this on paper and upload a picture or similar. This appendix should
 > not take more than 1 page.
+![image](https://user-images.githubusercontent.com/40441260/145854076-8701642b-af18-48ea-be1d-a523964fa9ac.png)
 
 ...
