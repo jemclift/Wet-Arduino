@@ -59,11 +59,11 @@ If you have a warning system and a way to dismiss a warning you will have to dea
 
 **Communication**
 
-...
+Our system has a master board and a slave board. The master is responsible for gathering data such as the temperature and humidity and then sending it to the slave board which is responsible for displaying that data and any warnings if deemed necessary. When the master board gathers data from any of its sensors the function `sendToSlave` gets called which creates a wire transaction, packages the data into a byte array and then executes the transaction. The slave board then unpacks this data and checks if any of the new values are extreme enough to warrant an alarm. Once the data has been processed the slave will then update the LCD display with the new data.
 
 **Watering**
 
-In order to water the plant we first collected a sample of dirt which we deemed to be appropriately moist. We deemed the soil as moist using a technique we came across in our research above "Feel the soil by pushing a finger an inch or so below the surface. If the soil is still moist, no further water is needed." We then used our soil moisture sensor to read how moist this sample of soil was (53%). In order for our watering system to keep the soil moisture at this level. Every 30 minutes the arudino will use the soil moisture sensor to take 10 readings of how moist the soil is and then calculate the average of these readings. If the average is below 50% then the pump will turn on for 2 seconds and pump a small amount of water through a tube which is then placed in the soil of the plant. In addition, if for any reason the user wanted to water the plant manually. we implemented a button that the user could press which would pump water into the plant for as long as it is pressed down for.
+In order to water the plant we first collected a sample of dirt which we deemed to be appropriately moist. We deemed the soil as moist using a technique we came across in our research above "Feel the soil by pushing a finger an inch or so below the surface. If the soil is still moist, no further water is needed." We then used our soil moisture sensor to read how moist this sample of soil was (53%). In order for our watering system to keep the soil moisture at this level. Every 30 minutes the arduino will use the soil moisture sensor to take 10 readings of how moist the soil is and then calculate the average of these readings. If the average is below 50% then the pump will turn on for 2 seconds and pump a small amount of water through a tube which is then placed in the soil of the plant. In addition, if for any reason the user wanted to water the plant manually. we implemented a button that the user could press which would pump water into the plant for as long as it is pressed down for.
 
 #### Additional research
 
@@ -79,7 +79,7 @@ In order to water the plant we first collected a sample of dirt which we deemed 
 > system. (approx ½ - 1 page)
 
 **Watering**
-In order to power the pump a transitor was powered using a current of roughly 5V. The transitor would only power the pump if 
+In order to power the pump a transistor was powered using a current of roughly 5V. The transistor would only power the pump if 
 
 #### Description
 One Arduino Uno is placed at the plant and the other is intended to display information and warnings about the plant so can be placed on a desk or somewhere in sight of the user. The boards are connected by 3 Wires which can be long enough to place the master and display far appart in a room.

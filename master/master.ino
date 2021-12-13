@@ -50,8 +50,9 @@ void manualButtonPump(){
 
 void sendToSlave() {
   Wire.beginTransmission(A5);
+  // send a formatted message containing the temperature, lightLevel and soilMoisture
   byte message[] = {(byte)temperature, lightLevel, soilMoisturePercentage};
-  int message_length = 10;
+  int message_length = 3;
   Wire.write(message, message_length);
   Wire.endTransmission();
 }

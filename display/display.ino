@@ -63,7 +63,7 @@ void turnOffWarning() {
   digitalWrite(led_pin, LOW);
 }
 
-// recieve data from master arduino
+// receive data from master arduino
 void receiveEvent(int howMany) {
 
   // read transmitted sensor data
@@ -71,7 +71,7 @@ void receiveEvent(int howMany) {
   lightLevel = Wire.read();
   moisture = Wire.read();
 
-  // clear extra bytes
+  // if there are any extra bytes read them to clear the wire
   while (Wire.available() > 0) {
     Wire.read();
   }
@@ -166,6 +166,12 @@ void buttonPress() {
   canBeWarning[warningCode-1] = false;
   warningCode = 0;
   digitalWrite(led_pin, LOW);
+  updateLCD(temperature, moisture, lightLevel);
 }
 
-void loop() {}
+void loop() {
+  // the warning message is dynamic so it needs to be updated
+  if (dispayWarning && canBeWarning[warningCode-1]) {
+    warningMsg();
+  } 
+}
