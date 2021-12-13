@@ -162,3 +162,6 @@ Overall we deemed this project as a great success. It ended up functioning exact
 
 **Master Board Schematic**
 
+
+![circuit (1)](https://user-images.githubusercontent.com/95437807/145874708-b71cb6ae-819f-497a-b197-96d95467bc34.png)
+
