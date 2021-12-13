@@ -79,7 +79,7 @@ In order to water the plant we first collected a sample of dirt which we deemed 
 > system. (approx ½ - 1 page)
 
 **Watering**
-In order to power the pump a transistor was powered using a current of roughly 5V. The transistor would only power the pump if 
+A transistor was used to power the pump. The emmitter was connected a source of 5V, The collector was connected straight to the ground, The base was connected to pin 3 and was in series with a 10k Ohm resistor. This meant that in order to water the arduino you would just need to send a voltage through pin 3.
 
 #### Description
 One Arduino Uno is placed at the plant and the other is intended to display information and warnings about the plant so can be placed on a desk or somewhere in sight of the user. The boards are connected by 3 Wires which can be long enough to place the master and display far appart in a room.
